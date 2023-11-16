@@ -22,6 +22,7 @@ public partial class FishingParser
                 ClientLanguage.German => German.Value,
                 ClientLanguage.French => French.Value,
                 ClientLanguage.Japanese => Japanese.Value,
+                ClientLanguage.Korean => Korean.Value,
                 _ => ChineseSimplified.Value,
             };
         }
@@ -67,6 +68,13 @@ public partial class FishingParser
             AreaDiscovered = new Regex(@"将新钓场(?<FishingSpot>.+)记录到了钓鱼笔记中！", RegexOptions.Compiled),
             Mooch = new Regex(@"开始利用上钩的.+尝试以小钓大。", RegexOptions.Compiled),
             Undiscovered = "未知钓场",
+        });
+        private static readonly Lazy<Regexes> Korean = new(() => new Regexes
+        {
+            Cast = new Regex(@".+ 님이 (?<FishingSpot>.+)에서 낚시를 시작합니다\.", RegexOptions.Compiled),
+            AreaDiscovered = new Regex(@"낚시 수첩에 새로운 낚시터 (?<FishingSpot>.+)의 정보를 기록했습니다!", RegexOptions.Compiled),
+            Mooch = new Regex(@"생미끼 낚시를 시도합니다\.", RegexOptions.Compiled),
+            Undiscovered = "미지의 낚시터",
         });
         // @formatter:on
     }
